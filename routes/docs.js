@@ -3,49 +3,23 @@ const router = express.Router();
 
 const docsModel = require("../models/docs");
 
-// Get all docs
 router.get(
-    "/documents",
+    "/",
     async (req, res) => {
-        const wines = await winesModel.getAllDocs();
+        const docs = await docsModel.getAllDocs;
 
         return res.json({
-            data: wines
+            data: docs
         });
     }
 );
 
-// Get single doc
-router.get(
-    "/document",
-    async (req, res) => {
-        const wines = await winesModel.getSingleDoc();
-
-        return res.json({
-            data: wines
-        });
-    }
-);
-
-// Create doc
 router.post(
-    "/create",
+    "/",
     async (req, res) => {
-        const newWine = req.body;
+        const newDoc = req.body;
 
-        const result = await winesModel.createDoc(newWine);
-
-        return res.status(201).json({ data: result});
-    }
-);
-
-// Update doc
-router.put(
-    "/update",
-    async (req, res) => {
-        const newWine = req.body;
-
-        const result = await winesModel.updateDoc(newWine);
+        const result = await docsModel.insertDoc(newDoc);
 
         return res.status(201).json({ data: result});
     }
