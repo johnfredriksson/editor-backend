@@ -9,7 +9,7 @@ const docs = require("./routes/docs.js");
 
 const app = express();
 
-const port = process.env.PORT || 8976;
+const port = process.env.PORT || 1337;
 
 app.use(cors());
 app.options('*', cors());

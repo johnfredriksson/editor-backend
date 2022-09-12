@@ -6,7 +6,8 @@ const docsModel = require("../models/docs");
 router.get(
     "/",
     async (req, res) => {
-        const docs = await docsModel.getAllDocs;
+        console.log("route found")
+        const docs = await docsModel.getAllDocs();
 
         return res.json({
             data: docs
