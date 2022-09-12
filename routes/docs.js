@@ -22,8 +22,30 @@ router.post(
 
         const result = await docsModel.insertDoc(newDoc);
 
-        return res.status(201).json({ data: result});
+        return res.status(201).json({ data: result });
     }
 );
+
+router.put(
+    "/",
+    async (req, res) => {
+        const doc = req.body;
+
+        const result = await docsModel.updateDoc(doc);
+
+        return res.status(204).json({ data: result });
+    }
+);
+
+router.delete(
+    "/",
+    async (req, res) => {
+        const doc = req.body;
+
+        const result = await docsModel.deleteDoc(doc._id);
+
+        return res.status(204).json({ data: result });
+    }
+)
 
 module.exports = router;
