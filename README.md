@@ -17,8 +17,9 @@ All routes is at ```/docs```.
 ```GET```
 - Fetch all documents.
 
-```
-    POST
-    
-```
+```POST```
+parameters
+```title````
+```content```
+- Create a new document
 
