@@ -21,26 +21,26 @@ All routes is at ```/docs```.
 
 ```POST```
 ```
-- optional (but recommended)
-title
-content
+optional (but recommended):
+    title
+    content
 ```
 - Create a new document.
 
 ```PUT```
 ```
-- required
-_id
-- optional (one is needed)
-title
-content
+required:
+    _id
+optional (one is needed):
+    title
+    content
 ```
 - Update a document.
 
 ```DELETE```
 ```
-- required
-_id
+required:
+    _id
 ```
 - Delete a document.
 
