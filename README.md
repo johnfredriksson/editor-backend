@@ -6,11 +6,13 @@ Deployed at [https://jsramverk-editor-jofr21.azurewebsites.net](https://jsramver
 
 ## Setup
 
-Install packages with ```npm install``.
+Install packages with ```npm install```.
 
 Start server with ```npm start```.
 
 ## Routes
+
+### Documents
 
 All routes is at ```/docs```.
 
