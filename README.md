@@ -1,6 +1,6 @@
 # Editor-API
 
-API to handle documents for Editor.
+API to handle back-end for Editor.
 
 Deployed at [https://jsramverk-editor-jofr21.azurewebsites.net](https://jsramverk-editor-jofr21.azurewebsites.net)
 
