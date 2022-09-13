@@ -3,6 +3,7 @@ const router = express.Router();
 
 const docsModel = require("../models/docs");
 
+// Get all documents
 router.get(
     "/",
     async (req, res) => {
@@ -15,6 +16,7 @@ router.get(
     }
 );
 
+// Create document
 router.post(
     "/",
     async (req, res) => {
@@ -26,6 +28,7 @@ router.post(
     }
 );
 
+// Update document
 router.put(
     "/",
     async (req, res) => {
@@ -37,6 +40,7 @@ router.put(
     }
 );
 
+// Delete document
 router.delete(
     "/",
     async (req, res) => {
