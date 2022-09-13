@@ -18,9 +18,8 @@ All routes is at ```/docs```.
 - Fetch all documents.
 
 ```POST```
-parameters
-
 ```
+*parameters*
 title
 content
 ```
