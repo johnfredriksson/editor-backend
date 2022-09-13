@@ -19,7 +19,10 @@ All routes is at ```/docs```.
 
 ```POST```
 parameters
-```title```
-```content```
+
+```
+title
+content
+```
 - Create a new document
 
