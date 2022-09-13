@@ -19,7 +19,7 @@ All routes is at ```/docs```.
 
 ```POST```
 ```
-*parameters*
+- parameters
 title
 content
 ```
