@@ -55,7 +55,7 @@ const docs = {
                     content: doc.content
                 }
             })
-            // console.log("finished");
+            return doc;
         } catch (error) {
             console.error(error.message);
         } finally {
