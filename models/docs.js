@@ -16,7 +16,7 @@ const docs = {
                 errors: {
                     message: error.message,
                 }
-            }
+            };
         } finally {
             db.client.close();
         }
@@ -43,19 +43,19 @@ const docs = {
         let db;
 
         try {
+            let result;
+
             db = await database.getDb();
 
-            // console.log("received doc is: " + doc._id)
-
-            const result = await db.collection.updateOne({
+            result = await db.collection.updateOne({
                 _id: new ObjectId(doc._id)
             }, {
                 $set: {
                     title: doc.title,
                     content: doc.content
                 }
-            })
-            return doc;
+            });
+            return result;
         } catch (error) {
             console.error(error.message);
         } finally {
@@ -68,9 +68,9 @@ const docs = {
         try {
             db = await database.getDb();
 
-            const result = await db.collection.deleteOne({
+            await db.collection.deleteOne({
                 _id: new ObjectId(id)
-            })
+            });
         } catch (error) {
             console.error(error.message);
         } finally {

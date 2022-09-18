@@ -1,3 +1,6 @@
+/* eslint no-undef: 0 */
+/* eslint no-async-promise-executor: 0 */
+
 process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
@@ -14,13 +17,13 @@ const collectionName = "docs";
 describe("App", () => {
     it("Test base URL", (done) => {
         chai.request(server)
-        .get("/")
-        .end((err, res) => {
-            res.body.msg.should.equal("Editor")
-            done();
-        })
-    })
-})
+            .get("/")
+            .end((err, res) => {
+                res.body.msg.should.equal("Editor");
+                done();
+            });
+    });
+});
 
 
 describe('Docs API', () => {
@@ -75,7 +78,7 @@ describe('Docs API', () => {
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
-                    res.body.should.have.property("data")
+                    res.body.should.have.property("data");
                     res.body.data.should.have.property("title");
                     res.body.data.should.have.property("content");
                     res.body.data.title.should.equal("Document title");
@@ -110,23 +113,24 @@ describe('Docs API', () => {
                         _id: res.body.data[0]._id,
                         title: "New document title",
                         content: "New document content"
-                    }
+                    };
+
                     chai.request(server)
-                    .put("/docs")
-                    .send(document)
-                    .end((err, res) => {
-                        res.should.have.status(204);
-                        chai.request(server)
-                        .get("/docs")
+                        .put("/docs")
+                        .send(document)
                         .end((err, res) => {
-                            res.should.have.status(200);
-                            res.body.should.be.an("object");
-                            res.body.data.should.be.an("array");
-                            res.body.data.length.should.be.equal(1);
-                            res.body.data[0].title.should.equal("New document title");
-                            res.body.data[0].content.should.equal("New document content");
-                        })
-                    });
+                            res.should.have.status(204);
+                            chai.request(server)
+                                .get("/docs")
+                                .end((err, res) => {
+                                    res.should.have.status(200);
+                                    res.body.should.be.an("object");
+                                    res.body.data.should.be.an("array");
+                                    res.body.data.length.should.be.equal(1);
+                                    res.body.data[0].title.should.equal("New document title");
+                                    res.body.data[0].content.should.equal("New document content");
+                                });
+                        });
                     done();
                 });
         });
@@ -139,21 +143,22 @@ describe('Docs API', () => {
                 .end((err, res) => {
                     let document = {
                         _id: res.body.data[0]._id
-                    }
+                    };
+
                     chai.request(server)
-                    .delete("/docs")
-                    .send(document)
-                    .end((err, res) => {
-                        res.should.have.status(204);
-                        chai.request(server)
-                        .get("/docs")
+                        .delete("/docs")
+                        .send(document)
                         .end((err, res) => {
-                            res.should.have.status(200);
-                            res.body.should.be.an("object");
-                            res.body.data.should.be.an("array");
-                            res.body.data.length.should.be.equal(0);
+                            res.should.have.status(204);
+                            chai.request(server)
+                                .get("/docs")
+                                .end((err, res) => {
+                                    res.should.have.status(200);
+                                    res.body.should.be.an("object");
+                                    res.body.data.should.be.an("array");
+                                    res.body.data.length.should.be.equal(0);
+                                });
                         });
-                    });
                     done();
                 });
         });

@@ -49,6 +49,6 @@ router.delete(
 
         return res.status(204).json({ data: result });
     }
-)
+);
 
 module.exports = router;
