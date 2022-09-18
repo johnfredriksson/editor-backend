@@ -122,12 +122,12 @@ describe('Docs API', () => {
                             res.should.have.status(204);
                             chai.request(server)
                                 .get("/docs")
-                                .end((err, res) => {
-                                    res.should.have.status(200);
-                                    res.body.should.be.an("object");
-                                    res.body.data.should.be.an("array");
-                                    res.body.data[0].title.should.equal("New document title");
-                                    res.body.data[0].content.should.equal("New document content");
+                                .end((err, resGet) => {
+                                    resGet.should.have.status(200);
+                                    resGet.body.should.be.an("object");
+                                    resGet.body.data.should.be.an("array");
+                                    resGet.body.data[0].title.should.equal("New document title");
+                                    resGet.body.data[0].content.should.equal("New document content");
                                 });
                         });
                     done();
