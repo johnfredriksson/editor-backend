@@ -126,7 +126,6 @@ describe('Docs API', () => {
                                     res.should.have.status(200);
                                     res.body.should.be.an("object");
                                     res.body.data.should.be.an("array");
-                                    res.body.data.length.should.be.equal(1);
                                     res.body.data[0].title.should.equal("New document title");
                                     res.body.data[0].content.should.equal("New document content");
                                 });
