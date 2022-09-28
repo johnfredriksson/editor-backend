@@ -1,12 +1,13 @@
 const database = require("../db/database.js");
 const ObjectId = require("mongodb").ObjectId;
+const collectionName = "docs";
 
 const docs = {
     getAllDocs: async function getAllDocs() {
         let db;
 
         try {
-            db = await database.getDb();
+            db = await database.getDb(collectionName);
 
             const allDocs = await db.collection.find().toArray();
 
@@ -25,7 +26,7 @@ const docs = {
         let db;
 
         try {
-            db = await database.getDb();
+            db = await database.getDb(collectionName);
 
             const result = await db.collection.insertOne(newDoc);
 
@@ -45,7 +46,7 @@ const docs = {
         try {
             let result;
 
-            db = await database.getDb();
+            db = await database.getDb(collectionName);
 
             result = await db.collection.updateOne({
                 _id: new ObjectId(doc._id)
@@ -66,7 +67,7 @@ const docs = {
         let db;
 
         try {
-            db = await database.getDb();
+            db = await database.getDb(collectionName);
 
             await db.collection.deleteOne({
                 _id: new ObjectId(id)
