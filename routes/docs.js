@@ -2,15 +2,22 @@ const express = require('express');
 const router = express.Router();
 
 const docsModel = require("../models/docs");
+const authModel = require("../models/auth");
 
 // Get all documents
 router.get(
-    "/",
+    "/:user",
+    (req, res, next) => authModel.checkToken(req, res, next),
     async (req, res) => {
-        const docs = await docsModel.getAllDocs();
+        const user = req.params.user;
+        const myDocs = await docsModel.getMyDocs(user);
+        const sharedDocs = await docsModel.getSharedDocs(user);
 
         return res.json({
-            data: docs
+            data: {
+                myDocs: myDocs,
+                sharedDocs: sharedDocs
+            }
         });
     }
 );
@@ -20,6 +27,7 @@ router.post(
     "/",
     async (req, res) => {
         const newDoc = req.body;
+        newDoc.allowed = [];
 
         const result = await docsModel.insertDoc(newDoc);
 
@@ -48,6 +56,32 @@ router.delete(
         const result = await docsModel.deleteDoc(doc._id);
 
         return res.status(204).json({ data: result });
+    }
+);
+
+// Invite user to document
+router.put(
+    "/invite",
+    (req, res, next) => authModel.checkToken(req, res, next),
+    async (req, res) => {
+        const doc = req.body._id;
+        const newUser = req.body.newUser;
+        const result = await docsModel.invite(res, doc, newUser);
+
+        return res.status(204).json({ data: result })
+    }
+);
+
+// Remove user from document
+router.put(
+    "/remove",
+    (req, res, next) => authModel.checkToken(req, res, next),
+    async (req, res) => {
+        const doc = req.body._id;
+        const user = req.body.user;
+        const result = await docsModel.remove(doc, user);
+
+        return res.status(204).json({ data: result })
     }
 );
 
