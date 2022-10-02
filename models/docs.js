@@ -131,9 +131,9 @@ const docs = {
                     await db.client.close();
                 }
             }
-
             return res.status(401).json({
-                data: {
+                errors: {
+                    status: 400,
                     message: "User does not exist",
                 }
             });

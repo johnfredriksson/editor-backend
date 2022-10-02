@@ -9,6 +9,8 @@ router.get(
     "/:user",
     (req, res, next) => authModel.checkToken(req, res, next),
     async (req, res) => {
+        console.log("fetching docs")
+
         const user = req.params.user;
         const myDocs = await docsModel.getMyDocs(user);
         const sharedDocs = await docsModel.getSharedDocs(user);
@@ -68,7 +70,7 @@ router.put(
         const newUser = req.body.newUser;
         const result = await docsModel.invite(res, doc, newUser);
 
-        return res.status(204).json({ data: result })
+        return result
     }
 );
 

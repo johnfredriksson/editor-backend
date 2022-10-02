@@ -61,9 +61,16 @@ const auth = {
 
                 await db.collection.insertOne(doc);
 
+                const payload = { email: email };
+                const secret = process.env.JWT_SECRET;
+
+                const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
                 return res.status(201).json({
                     data: {
-                        message: "User successfully created"
+                        message: "User successfully created",
+                        email: email,
+                        token: token,
                     }
                 });
             } catch (error) {
@@ -110,7 +117,8 @@ const auth = {
 
 
             return res.status(401).json({
-                data: {
+                errors: {
+                    status: 400,
                     message: "User does not exist",
                 }
             });
@@ -178,6 +186,7 @@ const auth = {
      */
     checkToken: function checkToken(req, res, next) {
         const token = req.headers['x-access-token'];
+        console.log("this is token: " + token)
 
         jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
             if (err) {

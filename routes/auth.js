@@ -9,7 +9,9 @@ router.post(
     async (req, res) => {
         const body = req.body;
 
-        await authModel.register(res, body);
+        const result = await authModel.register(res, body);
+
+        return result
     }
 );
 
@@ -19,8 +21,23 @@ router.post(
     async (req, res) => {
         const body = req.body;
 
-        await authModel.login(res, body);
+        const result = await authModel.login(res, body);
+
+        return result
     }
 );
+
+// Validate jwt token
+router.get(
+    "/token",
+    (req, res, next) => authModel.checkToken(req, res, next),
+    async (req, res) => {
+        const result = authModel.checkToken(req, res, next);
+
+        console.log(result)
+
+        return result
+    }
+)
 
 module.exports = router;
