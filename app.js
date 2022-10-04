@@ -13,23 +13,37 @@ const httpServer = require("http").createServer(app);
 
 const port = process.env.PORT || 1337;
 
+const visual = true;
+const { graphqlHTTP } = require('express-graphql');
+const {
+  GraphQLSchema
+} = require("graphql");
+
+const RootQueryType = require("./graphql/root.js");
+
 
 app.use(cors());
 app.options('*', cors());
 
 app.disable('x-powered-by');
 
-// don't show the log when it is test
 if (process.env.NODE_ENV !== 'test') {
-    // use morgan to log at command line
-    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
+    app.use(morgan('combined'));
 }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
 app.use("/docs", docs);
 app.use("/auth", auth);
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: visual,
+}));
 
 app.get('/', (req, res) => {
     res.json({

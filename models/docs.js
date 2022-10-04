@@ -44,6 +44,26 @@ const docs = {
             db.client.close();
         }
     },
+    // Fetch documents where user is author
+    getSingleDoc: async function getSingleDoc(id) {
+        let db;
+
+        try {
+            db = await database.getDb(collectionName);
+
+            const doc = await db.collection.findOne({_id: new ObjectId(id)});
+
+            return doc;
+        } catch (error) {
+            return {
+                errors: {
+                    message: error.message,
+                }
+            };
+        } finally {
+            db.client.close();
+        }
+    },
     // Create a new document
     insertDoc: async function insertDoc(newDoc) {
         let db;
