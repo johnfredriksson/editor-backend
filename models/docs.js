@@ -97,7 +97,8 @@ const docs = {
             }, {
                 $set: {
                     title: doc.title,
-                    content: doc.content
+                    content: doc.content,
+                    comments: doc.comments,
                 }
             });
             return result;

@@ -25,6 +25,7 @@ const RootQueryType = new GraphQLObjectType({
                 return document;
             }
         },
+        
         myDocs: {
             type: new GraphQLList(DocumentType),
             description: "get all of owned docs",
