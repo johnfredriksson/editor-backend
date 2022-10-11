@@ -186,7 +186,6 @@ const auth = {
      */
     checkToken: function checkToken(req, res, next) {
         const token = req.headers['x-access-token'];
-        console.log("this is token: " + token)
 
         jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
             if (err) {
@@ -201,6 +200,13 @@ const auth = {
             // Valid token send on the request
             next();
         });
+    },
+    createToken: function createToken() {
+        const payload = "invited";
+        const secret = process.env.JWT_SECRET;
+        const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
+        return token
     }
 };
 

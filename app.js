@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const docs = require("./routes/docs.js");
 const auth = require("./routes/auth.js");
+const invite = require("./routes/invite.js");
 
 const app = express();
 const httpServer = require("http").createServer(app);
@@ -40,6 +41,7 @@ const schema = new GraphQLSchema({
 
 app.use("/docs", docs);
 app.use("/auth", auth);
+app.use("/invite", invite);
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     graphiql: visual,
