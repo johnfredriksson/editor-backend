@@ -40,14 +40,5 @@ router.get(
     }
 );
 
-// Create jwt token
-router.get(
-    "/generatetoken",
-    async (req, res) => {
-        const result = authModel.createToken();
-
-        return result
-    }
-);
 
 module.exports = router;
